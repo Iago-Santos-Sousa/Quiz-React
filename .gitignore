@@ -23,9 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-src/components/BoxQuestions.jsx
-src/components/Contdown.jsx
-src/components/DelaryRender.jsx
-src/components/ResultBox.jsx
-src/components/InfoBox.jsx
+exemplos/
 
