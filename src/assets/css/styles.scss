@@ -1,0 +1,151 @@
+$blue-color: #4285f4;
+$green-color: #0f9d58;
+$red-color: #db4437;
+
+@import url("https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@100;200;300;400;500;600;700;800&display=swap");
+
+body {
+  font-family: "Anek Malayalam", sans-serif;
+  background: linear-gradient(90.04deg, $blue-color 0.03%, $green-color 99.96%);
+  color: $green-color;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0 30px;
+  min-height: 100vh;
+}
+
+#root {
+  position: relative;
+}
+
+.intro-box {
+  border-radius: 4px;
+  // margin-top: 100px;
+  // padding: 30px 60px;
+  background: #ffffff;
+  button {
+    // align-items: center;
+    background-clip: padding-box;
+    background-color: $green-color;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    // display: inline-flex;
+    font-size: 16px;
+    font-weight: 600;
+    // justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 200px;
+  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hide {
+  display: none;
+}
+
+.quiz-container {
+  max-width: 500px;
+  min-width: 250px;
+  background: #ffffff;
+  border-radius: 4px;
+  margin-top: 100px;
+  padding: 30px 60px;
+
+  .active-question-no {
+    font-size: 32px;
+    font-weight: 500;
+    color: $green-color;
+  }
+
+  .total-question {
+    font-size: 16px;
+    font-weight: 500;
+    color: #e0dee3;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  ul {
+    margin-top: 20px;
+    margin-left: -40px;
+    li {
+      text-decoration: none;
+      list-style: none;
+      color: #2a4b26;
+      font-size: 16px;
+      background: #ffffff;
+      border: 1px solid #eaeaea;
+      border-radius: 16px;
+      padding: 11px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    .selected-answer {
+      background: $green-color;
+      color: white;
+      font-weight: bold;
+      border: 1px solid $green-color;
+    }
+  }
+
+  button {
+    background-color: $green-color;
+    border-radius: 9px;
+    font-size: 18px;
+    color: #ffffff;
+    padding: 10px 42px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    &:disabled {
+      background: #e7e8e9;
+      color: #9fa3a9;
+      cursor: not-allowed;
+    }
+  }
+
+  .flex-right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .result {
+    h3 {
+      font-size: 24px;
+      letter-spacing: 1.4px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 500;
+      span {
+        color: #800080;
+        font-size: 22px;
+      }
+    }
+  }
+}
