@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 // objeto com perguntas e respostas
 const quiz = {
