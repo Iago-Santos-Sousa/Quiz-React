@@ -203,15 +203,15 @@ const Quiz = () => {
       ) : (
         // Resultados finais
         <div className="result">
-          <h3>Result</h3>
+          <h3>Resultado</h3>
           <p>
-            Total Question: <span>{questions.length}</span>
+            Questões totais: <span>{questions.length}</span>
           </p>
           <p>
-            Correct Answers:<span> {result.correctAnswers}</span>
+            Respostas certas:<span> {result.correctAnswers}</span>
           </p>
           <p>
-            Wrong Answers:<span> {result.wrongAnswers}</span>
+            Resposta erradas:<span> {result.wrongAnswers}</span>
           </p>
 
           <div className="flex-right">
