@@ -25,6 +25,7 @@ dist-ssr
 
 src/components/BoxQuestions.jsx
 src/components/Contdown.jsx
-src/components/DelayRender.jsx
+src/components/DelaryRender.jsx
 src/components/ResultBox.jsx
+src/components/InfoBox.jsx
 
