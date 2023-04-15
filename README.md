@@ -1,4 +1,4 @@
-# **Quiz-React**
+# Quiz-React
 
 ### Quiz sobre JavaScript feito com React.js
 
