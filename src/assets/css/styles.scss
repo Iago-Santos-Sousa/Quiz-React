@@ -68,6 +68,16 @@ body {
   margin-top: 100px;
   padding: 30px 60px;
 
+  .numbers-show {
+    position: relative;
+
+    & span:last-child {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
   .active-question-no {
     font-size: 32px;
     font-weight: 500;
