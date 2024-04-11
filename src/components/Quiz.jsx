@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 
 import { quiz } from "../utils/quiz";
 
+let totalSeconds = 0;
+let intervalSeconds = null;
+
 const Quiz = () => {
   const [seconds, setSeconds] = useState(0);
   const [progress, setProgress] = useState(0);
-
-  let totalSeconds = 0;
-  let intervalSeconds = null;
 
   // pergunta ativa
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -38,30 +38,35 @@ const Quiz = () => {
   // função para ir para a próxima questão
   const onClickNext = () => {
     setSelectedAnswerIndex(null);
-    setResult((prev) =>
-      // espalha as props de "result aqui" e conta as repsosta certas ou erradas
-      selectedAnswer
+    setResult((prev) => {
+      return selectedAnswer
         ? {
             ...prev,
             correctAnswers: prev.correctAnswers + 1,
           }
-        : { ...prev, wrongAnswers: prev.wrongAnswers + 1 },
-    );
+        : { ...prev, wrongAnswers: prev.wrongAnswers + 1 };
+    });
 
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1);
-      setSeconds((prev) => (prev = 0));
+      setSeconds(0);
+      totalSeconds = 0;
+      incrementInterval();
     } else {
       setActiveQuestion(0);
       setShowResult(true);
+      totalSeconds = 0;
       clearInterval(intervalSeconds);
+      setSeconds(0);
+      setProgress(0);
     }
   };
 
-  // na resposta selecionada ativar o estilo css e comparar com a repsosta correta
+  // na resposta selecionada ativar o estilo css e comparar com a resposta correta
   const onAnswerSelected = (answer, index) => {
     setSelectedAnswerIndex(index);
     clearInterval(intervalSeconds);
+    totalSeconds = 0;
     console.log(answer);
 
     if (answer === correctAnswer) {
@@ -78,34 +83,54 @@ const Quiz = () => {
     window.location.reload();
   };
 
-  useEffect(() => {
-    totalSeconds = (seconds * 60) / 60;
+  const incrementInterval = () => {
+    setProgress(0);
+
+    totalSeconds = (totalSeconds * 60) / 60;
 
     intervalSeconds = setInterval(() => {
       totalSeconds++;
       const newSeconds = totalSeconds % 60;
-      const newProgress = (newSeconds / 15) * 100; // Calcula o progresso
+      const newProgress = (newSeconds / 20) * 100; // Calcula o progresso
 
       setSeconds(newSeconds);
       setProgress(newProgress);
-    }, 1000);
 
-    if (totalSeconds === 10) {
-      clearInterval(intervalSeconds);
-      totalSeconds = 0;
+      if (totalSeconds === 20) {
+        clearInterval(intervalSeconds);
+        totalSeconds = 0;
 
-      if (!selectedAnswer) {
-        onAnswerSelected(question[0], 0);
+        if (!selectedAnswer) {
+          onAnswerSelected(question[0], 0);
+        }
       }
-    }
+
+      if (showResult) {
+        totalSeconds = 0;
+        clearInterval(intervalSeconds);
+        intervalSeconds = null;
+        setSeconds(0);
+        setProgress(0);
+      }
+    }, 1000);
+  };
+
+  useEffect(() => {
+    incrementInterval();
 
     return () => {
       clearInterval(intervalSeconds);
     };
-  }, [seconds]);
+  }, []);
 
   return (
     <div className="quiz-container">
+      <div className="progress-counter-parent">
+        <div
+          className="progress-counter-child"
+          style={{ width: !showResult ? `${progress}%` : "0" }}
+        ></div>
+      </div>
       {/* Mostra os resultados */}
       {!showResult ? (
         <div>
@@ -153,6 +178,7 @@ const Quiz = () => {
         </div>
       ) : (
         // Resultados finais
+
         <div className="result">
           <h3>Resultado</h3>
           <p>

@@ -61,6 +61,7 @@ body {
 }
 
 .quiz-container {
+  position: relative;
   max-width: 500px;
   min-width: 250px;
   background: #ffffff;
@@ -157,5 +158,19 @@ body {
         font-size: 22px;
       }
     }
+  }
+}
+
+.progress-counter-parent {
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: whitesmoke;
+  height: 10px;
+
+  .progress-counter-child {
+    height: 100%;
+    background-color: #99ccff;
   }
 }
