@@ -7,6 +7,12 @@ const App = () => {
   return (
     <>
       <div className={show ? "intro-box" : "hide"}>
+        <h1>Quiz JavaScript</h1>
+        <p>Você terá 20 segundos para escolher uma das respostas.</p>
+        <p>
+          Caso o tempo chegue a 20 segundos, umas das respostas será marcada
+          aleatoriamente.
+        </p>
         <button onClick={() => setShow(false)}>Iniciar Quiz</button>
       </div>
 

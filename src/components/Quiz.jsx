@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Children } from "react";
 
 import { quiz } from "../utils/quiz";
 
@@ -29,11 +29,8 @@ const Quiz = () => {
 
   //"objeto "quiz" desestruturado para array"
   const { questions } = quiz;
-  console.log(questions);
 
   const { question, choices, correctAnswer } = questions[activeQuestion];
-
-  console.log(question);
 
   // função para ir para a próxima questão
   const onClickNext = () => {
@@ -63,7 +60,7 @@ const Quiz = () => {
   };
 
   // na resposta selecionada ativar o estilo css e comparar com a resposta correta
-  const onAnswerSelected = (answer, index) => {
+  const onAnswerSelected = (index, answer) => {
     setSelectedAnswerIndex(index);
     clearInterval(intervalSeconds);
     totalSeconds = 0;
@@ -83,6 +80,14 @@ const Quiz = () => {
     window.location.reload();
   };
 
+  const aleatoryNumber = (number) => {
+    const num = Math.floor(Math.random() * number);
+    setSelectedAnswerIndex(num);
+    // return num;
+
+    onAnswerSelected(num, choices[num]);
+  };
+
   const incrementInterval = () => {
     setProgress(0);
 
@@ -100,9 +105,8 @@ const Quiz = () => {
         clearInterval(intervalSeconds);
         totalSeconds = 0;
 
-        if (!selectedAnswer) {
-          onAnswerSelected(question[0], 0);
-        }
+        // onAnswerSelected(aleatoryNumber(4), choices[selectedAnswerIndex]);
+        aleatoryNumber(4);
       }
 
       if (showResult) {
@@ -153,10 +157,21 @@ const Quiz = () => {
             {/* Escolhas */}
             {choices.map((answer, index) => (
               <li
-                onClick={() => onAnswerSelected(answer, index)}
+                onClick={() => {
+                  if (totalSeconds > 0) {
+                    onAnswerSelected(index, answer);
+                  }
+                }}
                 key={answer}
                 className={
-                  selectedAnswerIndex === index ? "selected-answer" : null
+                  selectedAnswerIndex === index
+                    ? "selected-answer"
+                    : (typeof selectedAnswerIndex === "number" &&
+                        selectedAnswer >= 0 &&
+                        selectedAnswerIndex !== index) ||
+                      (totalSeconds === 5 && selectedAnswerIndex !== index)
+                    ? "disable-questions"
+                    : ""
                 }
               >
                 {answer}
