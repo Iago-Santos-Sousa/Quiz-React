@@ -1,4 +1,4 @@
-# Quiz - React.JS 
+# Quiz - JavaScript
 
 ## 📷 Screenshot
 ![Screenshot](https://github.com/Iago-Santos-Sousa/Quiz-React/blob/main/Captura%20de%20tela%202024-08-07%20213048.png?raw=true)
